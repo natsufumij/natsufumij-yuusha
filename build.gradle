@@ -1,0 +1,14 @@
+description = 'Yuusha Of NatsufumiJ'
+allprojects {
+
+    group = 'hut.natsufumij.yuusha'
+
+    repositories {
+        mavenCentral()
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+
+}
