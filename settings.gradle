@@ -1,5 +1,0 @@
-rootProject.name = 'natsufumij-yuusha'
-
-include ':yuusha-stats'
-include ':yuusha-blade'
-

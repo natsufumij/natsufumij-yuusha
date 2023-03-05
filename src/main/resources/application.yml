@@ -1,0 +1,33 @@
+server:
+  port: 8091
+spring:
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 500MB
+  application:
+    name: port-permission
+  redis:
+    host: 192.168.2.191
+    password: moeyui0624
+  datasource:
+    url: jdbc:mysql://192.168.2.191:3306/natsufumij?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: root
+    password: moeyui0624
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations:
+    - classpath:hut/natsufumij/**/*Mapper.xml
+
+minio:
+  url: http://192.168.2.191:9000
+  accessKey: root
+  secretKey: moeyui0624
