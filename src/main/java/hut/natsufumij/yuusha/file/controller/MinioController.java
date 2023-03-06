@@ -14,6 +14,9 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.InputStream;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.Objects;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/file")
@@ -22,15 +25,15 @@ public class MinioController {
 
     private final MinioService minioService;
 
-    @RequestMapping(value = "/uploadfile", method = RequestMethod.POST)
-    public void fileupload(@RequestParam MultipartFile uploadfile, @RequestParam String bucket,
-                               @RequestParam(required=false) String objectName) throws Exception {
+    @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
+    public RV<String> fileUpload(@RequestParam MultipartFile uploadFile, @RequestParam String bucket) throws Exception {
         minioService.createBucket(bucket);
-        if (objectName != null) {
-            minioService.uploadFile(uploadfile.getInputStream(), bucket, objectName);
-        } else {
-            minioService.uploadFile(uploadfile.getInputStream(), bucket, uploadfile.getOriginalFilename());
-        }
+        int index = Objects.requireNonNull(uploadFile.getOriginalFilename()).lastIndexOf(".");
+        String fmt = uploadFile.getOriginalFilename().substring(index);
+        String uuid = UUID.randomUUID().toString();
+        String fName = uuid + fmt;
+        minioService.uploadFile(uploadFile.getInputStream(), bucket, fName);
+        return RV.of(fName);
     }
 
     @RequestMapping(value = "/listBuckets", method = RequestMethod.GET)
@@ -45,10 +48,13 @@ public class MinioController {
 
     @RequestMapping(value = "/downloadFile", method = RequestMethod.GET)
     public void downloadFile(@RequestParam String bucket, @RequestParam String objectName,
+                             @RequestParam String fileName,
                              HttpServletResponse response) throws Exception {
         InputStream stream = minioService.download(bucket, objectName);
         ServletOutputStream output = response.getOutputStream();
-        response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(objectName.substring(objectName.lastIndexOf("/") + 1), "UTF-8"));
+        String fmt=objectName.substring(objectName.lastIndexOf("."));
+        response.setHeader("Content-Disposition",
+                "attachment;filename=" + URLEncoder.encode(fileName+fmt, StandardCharsets.UTF_8));
         response.setContentType("application/octet-stream");
         response.setCharacterEncoding("UTF-8");
         IOUtils.copy(stream, output);
