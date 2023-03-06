@@ -11,7 +11,7 @@ spring:
     host: 192.168.2.191
     password: moeyui0624
   datasource:
-    url: jdbc:mysql://192.168.2.191:3306/natsufumij?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://192.168.2.191:3306/yuusha?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
     username: root
     password: moeyui0624
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -25,7 +25,7 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
   mapper-locations:
-    - classpath:hut/natsufumij/**/*Mapper.xml
+    - classpath:hut/natsufumij/yuusha/**/*Mapper.xml
 
 minio:
   url: http://192.168.2.191:9000
