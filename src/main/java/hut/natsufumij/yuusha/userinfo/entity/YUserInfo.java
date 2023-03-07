@@ -1,9 +1,10 @@
 package hut.natsufumij.yuusha.userinfo.entity;
 
+import hut.natsufumij.yuusha.util.bean.EntityM;
+
 import java.util.Date;
 
-public class YUserInfo {
-    private Long id;
+public class YUserInfo extends EntityM {
 
     private String userName;
 
@@ -23,23 +24,7 @@ public class YUserInfo {
 
     private Integer userState;
 
-    private Date createTime;
-
-    private Date updateTime;
-
-    private Long creator;
-
-    private Long updater;
-
     private String avatar;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getUserName() {
         return userName;
@@ -111,38 +96,6 @@ public class YUserInfo {
 
     public void setUserState(Integer userState) {
         this.userState = userState;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public Long getCreator() {
-        return creator;
-    }
-
-    public void setCreator(Long creator) {
-        this.creator = creator;
-    }
-
-    public Long getUpdater() {
-        return updater;
-    }
-
-    public void setUpdater(Long updater) {
-        this.updater = updater;
     }
 
     public String getAvatar() {
