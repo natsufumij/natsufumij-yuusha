@@ -1,153 +1,175 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="hut.natsufumij.yuusha.social.dao.YSocialInfoMapper" >
-  <resultMap id="BaseResultMap" type="hut.natsufumij.yuusha.social.entity.YSocialInfo" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="manage_id" property="manageId" jdbcType="BIGINT" />
-    <result column="moto" property="moto" jdbcType="VARCHAR" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="creator" property="creator" jdbcType="BIGINT" />
-    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-    <result column="updater" property="updater" jdbcType="BIGINT" />
-    <result column="social_state" property="socialState" jdbcType="TINYINT" />
-    <result column="avatar" property="avatar" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, name, manage_id, moto, create_time, creator, update_time, updater, social_state, 
-    avatar
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
-    <include refid="Base_Column_List" />
-    from y_social_info
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from y_social_info
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" parameterType="hut.natsufumij.yuusha.social.entity.YSocialInfo" >
-    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into y_social_info (name, manage_id, moto, 
-      create_time, creator, update_time, 
-      updater, social_state, avatar
-      )
-    values (#{name,jdbcType=VARCHAR}, #{manageId,jdbcType=BIGINT}, #{moto,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{creator,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{updater,jdbcType=BIGINT}, #{socialState,jdbcType=TINYINT}, #{avatar,jdbcType=VARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="hut.natsufumij.yuusha.social.entity.YSocialInfo" >
-    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into y_social_info
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="name != null" >
-        name,
-      </if>
-      <if test="manageId != null" >
-        manage_id,
-      </if>
-      <if test="moto != null" >
-        moto,
-      </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-      <if test="creator != null" >
-        creator,
-      </if>
-      <if test="updateTime != null" >
-        update_time,
-      </if>
-      <if test="updater != null" >
-        updater,
-      </if>
-      <if test="socialState != null" >
-        social_state,
-      </if>
-      <if test="avatar != null" >
-        avatar,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="manageId != null" >
-        #{manageId,jdbcType=BIGINT},
-      </if>
-      <if test="moto != null" >
-        #{moto,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="creator != null" >
-        #{creator,jdbcType=BIGINT},
-      </if>
-      <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updater != null" >
-        #{updater,jdbcType=BIGINT},
-      </if>
-      <if test="socialState != null" >
-        #{socialState,jdbcType=TINYINT},
-      </if>
-      <if test="avatar != null" >
-        #{avatar,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="hut.natsufumij.yuusha.social.entity.YSocialInfo" >
-    update y_social_info
-    <set >
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="manageId != null" >
+<mapper namespace="hut.natsufumij.yuusha.social.dao.YSocialInfoMapper">
+    <resultMap id="BaseResultMap" type="hut.natsufumij.yuusha.social.entity.YSocialInfo">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="manage_id" property="manageId" jdbcType="BIGINT"/>
+        <result column="moto" property="moto" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="creator" property="creator" jdbcType="BIGINT"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="updater" property="updater" jdbcType="BIGINT"/>
+        <result column="social_state" property="socialState" jdbcType="TINYINT"/>
+        <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, name, manage_id, moto, create_time, creator, update_time, updater, social_state,
+        avatar
+    </sql>
+    <sql id="SimpleVo">
+        id, name, manage_id, moto, social_state, avatar
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from y_social_info
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="querySocial" resultType="hut.natsufumij.yuusha.social.param.vo.SocialSimpleV">
+        select
+        <include refid="SimpleVo"/>
+        from y_social_info
+        <where>
+            <if test="id!=null">
+                id=#{id}
+            </if>
+            <if test="id==null and ids!=null and !ids.isEmpty()">
+                id in
+                <foreach collection="ids" separator="," open="(" close=")" item="item">
+                    #{item}
+                </foreach>
+                <if test="name!=null and name!=''">
+                    and name like concat(#{name},'%')
+                </if>
+            </if>
+        </where>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from y_social_info
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="hut.natsufumij.yuusha.social.entity.YSocialInfo">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into y_social_info (name, manage_id, moto,
+        create_time, creator, update_time,
+        updater, social_state, avatar
+        )
+        values (#{name,jdbcType=VARCHAR}, #{manageId,jdbcType=BIGINT}, #{moto,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP}, #{creator,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP},
+        #{updater,jdbcType=BIGINT}, #{socialState,jdbcType=TINYINT}, #{avatar,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="hut.natsufumij.yuusha.social.entity.YSocialInfo">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into y_social_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                name,
+            </if>
+            <if test="manageId != null">
+                manage_id,
+            </if>
+            <if test="moto != null">
+                moto,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="creator != null">
+                creator,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="updater != null">
+                updater,
+            </if>
+            <if test="socialState != null">
+                social_state,
+            </if>
+            <if test="avatar != null">
+                avatar,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="manageId != null">
+                #{manageId,jdbcType=BIGINT},
+            </if>
+            <if test="moto != null">
+                #{moto,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="creator != null">
+                #{creator,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updater != null">
+                #{updater,jdbcType=BIGINT},
+            </if>
+            <if test="socialState != null">
+                #{socialState,jdbcType=TINYINT},
+            </if>
+            <if test="avatar != null">
+                #{avatar,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="hut.natsufumij.yuusha.social.entity.YSocialInfo">
+        update y_social_info
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="manageId != null">
+                manage_id = #{manageId,jdbcType=BIGINT},
+            </if>
+            <if test="moto != null">
+                moto = #{moto,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="creator != null">
+                creator = #{creator,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updater != null">
+                updater = #{updater,jdbcType=BIGINT},
+            </if>
+            <if test="socialState != null">
+                social_state = #{socialState,jdbcType=TINYINT},
+            </if>
+            <if test="avatar != null">
+                avatar = #{avatar,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="hut.natsufumij.yuusha.social.entity.YSocialInfo">
+        update y_social_info
+        set name = #{name,jdbcType=VARCHAR},
         manage_id = #{manageId,jdbcType=BIGINT},
-      </if>
-      <if test="moto != null" >
         moto = #{moto,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="creator != null" >
         creator = #{creator,jdbcType=BIGINT},
-      </if>
-      <if test="updateTime != null" >
         update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updater != null" >
         updater = #{updater,jdbcType=BIGINT},
-      </if>
-      <if test="socialState != null" >
         social_state = #{socialState,jdbcType=TINYINT},
-      </if>
-      <if test="avatar != null" >
-        avatar = #{avatar,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="hut.natsufumij.yuusha.social.entity.YSocialInfo" >
-    update y_social_info
-    set name = #{name,jdbcType=VARCHAR},
-      manage_id = #{manageId,jdbcType=BIGINT},
-      moto = #{moto,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      creator = #{creator,jdbcType=BIGINT},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      updater = #{updater,jdbcType=BIGINT},
-      social_state = #{socialState,jdbcType=TINYINT},
-      avatar = #{avatar,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+        avatar = #{avatar,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
 </mapper>

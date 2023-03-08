@@ -4,6 +4,7 @@ import hut.natsufumij.yuusha.social.dao.YSocialInfoMapper;
 import hut.natsufumij.yuusha.social.entity.YSocialInfo;
 import hut.natsufumij.yuusha.social.param.bo.SocialMQuery;
 import hut.natsufumij.yuusha.social.param.bo.SocialMRegister;
+import hut.natsufumij.yuusha.social.param.bo.SocialMUpdate;
 import hut.natsufumij.yuusha.social.param.vo.SocialSimpleV;
 import hut.natsufumij.yuusha.social.service.SocialService;
 import hut.natsufumij.yuusha.util.bean.Beans;
@@ -26,6 +27,13 @@ public class SocialServiceImpl implements SocialService {
 
     @Override
     public List<SocialSimpleV> querySocial(SocialMQuery query) {
-        return null;
+        query.startPage();
+        return socialInfoMapper.querySocial(query);
+    }
+
+    @Override
+    public void updateSocial(SocialMUpdate update) {
+        YSocialInfo socialInfo=Beans.convert(update,YSocialInfo::new);
+        socialInfoMapper.updateByPrimaryKeySelective(socialInfo);
     }
 }

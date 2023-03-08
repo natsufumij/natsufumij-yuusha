@@ -2,6 +2,7 @@ package hut.natsufumij.yuusha.social.service;
 
 import hut.natsufumij.yuusha.social.param.bo.SocialMQuery;
 import hut.natsufumij.yuusha.social.param.bo.SocialMRegister;
+import hut.natsufumij.yuusha.social.param.bo.SocialMUpdate;
 import hut.natsufumij.yuusha.social.param.vo.SocialSimpleV;
 
 import java.util.List;
@@ -23,4 +24,10 @@ public interface SocialService {
      * @return
      */
     List<SocialSimpleV> querySocial(SocialMQuery query);
+
+    /**
+     * 更新社团信息
+     * @param update
+     */
+    void updateSocial(SocialMUpdate update);
 }

@@ -3,6 +3,7 @@ package hut.natsufumij.yuusha.util.advice;
 import hut.natsufumij.yuusha.util.exception.YuushaException;
 import hut.natsufumij.yuusha.util.resp.RV;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.ObjectError;
@@ -39,7 +40,11 @@ public class GlobalAdvice {
     public ResponseEntity<RV<Void>> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         List<ObjectError> list = e.getAllErrors();
         StringBuilder builder = new StringBuilder();
-        list.forEach(a -> builder.append(a.getDefaultMessage()));
+        list.forEach(a -> {
+            Object[] args = a.getArguments();
+            DefaultMessageSourceResolvable r = (DefaultMessageSourceResolvable)args[0];
+            builder.append("["+r.getDefaultMessage()+"]"+a.getDefaultMessage()+",");
+        });
         return new ResponseEntity<>(
                 RV.buildError(705, builder.toString()), HttpStatus.BAD_REQUEST);
     }
