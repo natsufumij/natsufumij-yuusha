@@ -1,4 +1,4 @@
-package hut.natsufumij.yuusha.userinfo.param.vo;
+package natsufumij.yuusha.userinfo.param.vo;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;

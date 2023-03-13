@@ -1,6 +1,6 @@
-package hut.natsufumij.yuusha.file.config;
+package natsufumij.yuusha.file.config;
 
-import io.minio.MinioClient;
+import io.minio.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

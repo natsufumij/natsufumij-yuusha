@@ -1,19 +1,19 @@
-package hut.natsufumij.yuusha.userinfo.param.vo;
+package natsufumij.yuusha.userinfo.entity;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import hut.natsufumij.common.bean.EntityM;
 import hut.natsufumij.yuusha.userinfo.enums.UserSex;
 import hut.natsufumij.yuusha.userinfo.enums.UserState;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Date;
 
-/**
- * 用户信息详情
- */
 @Data
-public class UserInfoSelfV {
-    @JsonSerialize(using = ToStringSerializer.class)
+@EqualsAndHashCode(callSuper = true)
+public class YUserInfo extends EntityM {
+    @TableId(type = IdType.AUTO)
     private Long id;
     private String userName;
     private String nickName;

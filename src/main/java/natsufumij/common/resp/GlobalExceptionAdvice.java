@@ -1,5 +1,7 @@
-package hut.natsufumij.common.resp;
+package natsufumij.common.resp;
 
+import hut.natsufumij.common.resp.V;
+import hut.natsufumij.common.resp.YuushaException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;

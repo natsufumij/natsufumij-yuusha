@@ -1,10 +1,9 @@
-package hut.natsufumij.yuusha.userinfo.param.bo;
+package natsufumij.yuusha.userinfo.param.bo;
 
 import hut.natsufumij.yuusha.userinfo.enums.UserSex;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -33,7 +32,6 @@ public class UserMPush {
     private String phone;
     @NotBlank
     @Length(max = 30)
-    @Email
     private String email;
     @NotBlank
     @Length(max = 255)

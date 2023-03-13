@@ -1,6 +1,7 @@
-package hut.natsufumij.common.resp;
+package natsufumij.common.resp;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.Getter;
 
 import java.util.List;

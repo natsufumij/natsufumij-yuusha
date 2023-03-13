@@ -1,5 +1,6 @@
-package hut.natsufumij.common.bean;
+package natsufumij.common.bean;
 
+import com.baomidou.mybatisplus.annotation.Version;
 import lombok.Data;
 
 import java.util.Date;
