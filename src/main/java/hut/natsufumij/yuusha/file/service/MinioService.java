@@ -1,24 +1,9 @@
 package hut.natsufumij.yuusha.file.service;
 
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-
-import lombok.AllArgsConstructor;
-
-import io.minio.BucketExistsArgs;
-import io.minio.GetObjectArgs;
-import io.minio.ListObjectsArgs;
-import io.minio.MakeBucketArgs;
-import io.minio.MinioClient;
-import io.minio.PutObjectArgs;
-import io.minio.RemoveBucketArgs;
-import io.minio.RemoveObjectArgs;
-import io.minio.Result;
-import io.minio.messages.Bucket;
-import io.minio.messages.Item;
 import lombok.Data;
-import org.springframework.stereotype.Service;
+
+import java.io.InputStream;
+import java.util.List;
 
 public interface MinioService {
 

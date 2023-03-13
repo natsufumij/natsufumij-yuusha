@@ -1,7 +1,9 @@
 package hut.natsufumij.yuusha.file.controller;
 
+import hut.natsufumij.common.resp.V;
 import hut.natsufumij.yuusha.file.service.MinioService;
-import hut.natsufumij.yuusha.util.resp.RV;
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
 import java.io.InputStream;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -26,24 +26,24 @@ public class MinioController {
     private final MinioService minioService;
 
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
-    public RV<String> fileUpload(@RequestParam MultipartFile uploadFile, @RequestParam String bucket) throws Exception {
+    public V<String> fileUpload(@RequestParam MultipartFile uploadFile, @RequestParam String bucket) throws Exception {
         minioService.createBucket(bucket);
         int index = Objects.requireNonNull(uploadFile.getOriginalFilename()).lastIndexOf(".");
         String fmt = uploadFile.getOriginalFilename().substring(index);
         String uuid = UUID.randomUUID().toString();
         String fName = uuid + fmt;
         minioService.uploadFile(uploadFile.getInputStream(), bucket, fName);
-        return RV.of(fName);
+        return V.yes(fName);
     }
 
     @RequestMapping(value = "/listBuckets", method = RequestMethod.GET)
-    public RV<String> listBuckets() throws Exception {
-        return RV.of(minioService.listBuckets());
+    public V<String> listBuckets() throws Exception {
+        return V.yes(minioService.listBuckets());
     }
 
     @RequestMapping(value = "/listFiles", method = RequestMethod.GET)
-    public RV<MinioService.Fileinfo> listFiles(@RequestParam String bucket) throws Exception {
-        return RV.of(minioService.listFiles(bucket));
+    public V<MinioService.Fileinfo> listFiles(@RequestParam String bucket) throws Exception {
+        return V.yes(minioService.listFiles(bucket));
     }
 
     @RequestMapping(value = "/downloadFile", method = RequestMethod.GET)

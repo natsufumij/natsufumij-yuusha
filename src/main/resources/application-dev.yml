@@ -1,0 +1,15 @@
+spring:
+  config:
+    activate:
+      on-profile:
+        - dev
+  datasource:
+    url: jdbc:mysql://192.168.2.191:3306/yuusha?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: root
+    password: moeyui0624
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+minio:
+  url: http://192.168.2.191:9000
+  accessKey: root
+  secretKey: moeyui0624

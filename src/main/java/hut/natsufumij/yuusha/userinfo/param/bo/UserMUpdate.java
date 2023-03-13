@@ -1,5 +1,6 @@
 package hut.natsufumij.yuusha.userinfo.param.bo;
 
+import hut.natsufumij.yuusha.userinfo.enums.UserSex;
 import lombok.Data;
 
 import javax.validation.constraints.Email;
@@ -11,7 +12,7 @@ public class UserMUpdate {
     @NotNull
     private Long id;
     private String nickName;
-    private Byte sex;
+    private UserSex sex;
     private Date birthday;
     private String moto;
     private String address;

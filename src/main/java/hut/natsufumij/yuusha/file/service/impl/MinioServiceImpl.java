@@ -47,7 +47,7 @@ public class MinioServiceImpl implements MinioService {
     /**
      * 列出一个桶中的所有文件和目录
      */
-    public List<MinioService.Fileinfo> listFiles(String bucket) throws Exception {
+    public List<Fileinfo> listFiles(String bucket) throws Exception {
         Iterable<Result<Item>> results = minioClient.listObjects(
                 ListObjectsArgs.builder().bucket(bucket).recursive(true).build());
 

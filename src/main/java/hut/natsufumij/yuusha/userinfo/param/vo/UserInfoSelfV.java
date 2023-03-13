@@ -1,5 +1,7 @@
 package hut.natsufumij.yuusha.userinfo.param.vo;
 
+import hut.natsufumij.yuusha.userinfo.enums.UserSex;
+import hut.natsufumij.yuusha.userinfo.enums.UserState;
 import lombok.Data;
 
 import java.util.Date;
@@ -12,12 +14,12 @@ public class UserInfoSelfV {
     private Long id;
     private String userName;
     private String nickName;
-    private Byte sex;
+    private UserSex sex;
     private Date birthday;
     private String moto;
     private String address;
     private String phone;
     private String email;
-    private Integer userState;
+    private UserState userState;
     private String avatar;
 }
